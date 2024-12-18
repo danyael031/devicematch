@@ -1,8 +1,8 @@
 //import React from 'react';
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { createHashRouter, RouterProvider } from "react-router";
 import { MainPage } from "../pages/Main";
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: "/",
     element: <MainPage />

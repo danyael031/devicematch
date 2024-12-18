@@ -34,13 +34,12 @@ CREATE TABLE categories (
 );
 
 CREATE TABLE device_compatibility (
+    id TEXT PRIMARY KEY,
     device1_id TEXT NOT NULL,
     device2_id TEXT NOT NULL,
     category_id TEXT NOT NULL,
-    score INTEGER NOT NULL,
     UNIQUE(device1_id, device2_id, category_id),
     CHECK (device1_id < device2_id),
-    CHECK (score BETWEEN 0 AND 5),
     FOREIGN KEY (device1_id) REFERENCES devices(id),
     FOREIGN KEY (device2_id) REFERENCES devices(id),
     FOREIGN KEY (category_id) REFERENCES categories(id)
