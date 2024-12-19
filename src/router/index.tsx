@@ -1,11 +1,17 @@
 //import React from 'react';
-import { createHashRouter, RouterProvider } from "react-router";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router";
 import { MainPage } from "../pages/Main";
+import { Layout } from "src/layout/Layout";
 
-export const router = createHashRouter([
+export const router = createBrowserRouter([
   {
-    path: "/",
-    element: <MainPage />
+    Component: Layout,
+    children: [
+      {
+        path: '/',
+        Component: MainPage
+      }
+    ]
   }
 ])
 
