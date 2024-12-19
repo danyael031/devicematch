@@ -14,13 +14,13 @@ pub fn run() {
         description: "create_initial_tables",
         sql: "
 CREATE TABLE brands (
-    id TEXT PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     name TEXT NOT NULL UNIQUE,
     image BLOB
 );
 
 CREATE TABLE devices (
-    id TEXT PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
     image BLOB,
     brand_id TEXT,
@@ -28,13 +28,13 @@ CREATE TABLE devices (
 );
 
 CREATE TABLE categories (
-    id TEXT PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     name TEXT NOT NULL UNIQUE,
     image BLOB
 );
 
 CREATE TABLE device_compatibility (
-    id TEXT PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     device1_id TEXT NOT NULL,
     device2_id TEXT NOT NULL,
     category_id TEXT NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE device_compatibility (
     tauri::Builder::default()
         .plugin(
             tauri_plugin_sql::Builder::new()
-                .add_migrations("sqlite:phonecases.db", migrations)
+                .add_migrations("sqlite:devicematch.db", migrations)
                 .build(),
         )
         .plugin(tauri_plugin_opener::init())

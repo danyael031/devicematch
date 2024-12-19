@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    phonecases_lib::run()
+    devicematch_lib::run()
 }
