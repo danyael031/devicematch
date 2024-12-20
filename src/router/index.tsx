@@ -1,7 +1,8 @@
 //import React from 'react';
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router";
+import { createBrowserRouter, RouterProvider } from "react-router";
 import { MainPage } from "../pages/Main";
 import { Layout } from "src/layout/Layout";
+import { SettingsPage } from "src/pages/Settings";
 
 export const router = createBrowserRouter([
   {
@@ -10,6 +11,10 @@ export const router = createBrowserRouter([
       {
         path: '/',
         Component: MainPage
+      },
+      {
+        path: '/settings',
+        Component: SettingsPage
       }
     ]
   }

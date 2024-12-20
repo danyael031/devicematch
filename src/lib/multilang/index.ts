@@ -10,7 +10,7 @@ export class MultiLang {
   private listeners: Array<Listener> = [];
   private multiLangConfig: MultiLangConfig = { languages: {}, defaultLang: '' };
   private selectedLang: string = '';
-  private cachedSnapshot: MultiLangSnapshot = { lt: () => '', langTranslation: { translation: {} } };
+  private cachedSnapshot: MultiLangSnapshot = { lt: () => '', langTranslation: { translation: {} }, selectedLang: '', setLanguage: () => { } };
 
   constructor() { }
 
@@ -20,22 +20,27 @@ export class MultiLang {
     }
   }
 
-  init(multiLangConfig: MultiLangConfig) {
-    this.multiLangConfig = multiLangConfig;
-    this.selectedLang = multiLangConfig.defaultLang;
+  init(config: MultiLangConfig) {
+    this.multiLangConfig = config;
+    this.selectedLang = config.defaultLang;
+    this.generateSnapshot();
   }
 
-  selectLanguage(key: string) {
+  private generateSnapshot() {
+    this.cachedSnapshot = {
+      lt: (key) => this.lt(key),
+      selectedLang: this.selectedLang,
+      setLanguage: (key) => this.setLanguage(key),
+      langTranslation: this.getSelectedTranslation()
+    }
+  }
+
+  setLanguage(key: string) {
     if (!this.multiLangConfig.languages[key]) {
       throw new Error('Language does not exist.');
     }
     this.selectedLang = key;
-
-    const lt = this.lt
-    const langTranslation = this.getSelectedTranslation()
-
-    this.cachedSnapshot = { lt, langTranslation }
-
+    this.generateSnapshot();
     this.emitChange();
   }
 

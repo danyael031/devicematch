@@ -3,7 +3,8 @@ import { MultiLangProviderProps, MultiLangSnapshot } from "./types";
 
 const MultiLangContext = createContext<MultiLangSnapshot>({
   lt: () => { return '' },
-  langTranslation: { translation: {} }
+  langTranslation: { translation: {} },
+  selectedLang: ''
 })
 
 export function MultiLangProvider({ children, mlang }: MultiLangProviderProps) {

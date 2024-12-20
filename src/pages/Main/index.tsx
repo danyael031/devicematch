@@ -1,18 +1,18 @@
 import Button from '@mui/material/Button'
-import { createPhone, createTable, } from 'src/db/phones'
+import { PageContainer } from 'src/components/PageContainer'
+import { mlang } from 'src/lang'
 
 export function MainPage() {
-
   return (
-    <div>
+    <PageContainer>
       <Button
         onClick={() => { }}
         variant='contained'
-      >Create Device</Button>
+      >{mlang.lt("create_device")}</Button>
       <Button
         onClick={() => { }}
         variant='contained'
       >Create compatibility</Button>
-    </div>
+    </PageContainer>
   )
 }

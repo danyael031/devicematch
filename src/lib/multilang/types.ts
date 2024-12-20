@@ -18,7 +18,9 @@ export type MultiLangConfig = {
 
 export type MultiLangSnapshot = {
   lt: (key: string) => string,
-  langTranslation: LanguageTranslation
+  langTranslation: LanguageTranslation,
+  selectedLang: string,
+  setLanguage: (key: string) => void,
 }
 
 export interface MultiLangProviderProps {
