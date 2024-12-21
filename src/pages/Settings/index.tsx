@@ -8,10 +8,10 @@ export function SettingsPage() {
 
   return (
     <PageContainer>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">{lt("lang_label")}</InputLabel>
+      <FormControl >
+        <InputLabel id="language">{lt("lang_label")}</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
+          labelId="language"
           id="demo-simple-select"
           value={selectedLang}
           label={lt("lang_label")}

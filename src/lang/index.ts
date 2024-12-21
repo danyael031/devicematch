@@ -7,7 +7,7 @@ mlang.init({
     "es": eslang,
     "en": enlang
   },
-  defaultLang: "en"
+  defaultLang: "es"
 })
 
 export { mlang };

@@ -6,7 +6,7 @@ import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded';
 import AssignmentRoundedIcon from '@mui/icons-material/AssignmentRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
-import { MenuItem } from './MenuItem';
+import { CustomListItem } from './CustomListItem';
 
 const mainListItems = [
   { to: '/', text: 'Home', icon: <HomeRoundedIcon /> },
@@ -25,13 +25,13 @@ export function MenuContent() {
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: 'space-between' }}>
       <List dense>
         {mainListItems.map((item, index) => (
-          <MenuItem key={index} item={item} />
+          <CustomListItem key={index} item={item} />
         ))}
       </List>
 
       <List dense>
         {secondaryListItems.map((item, index) => (
-          <MenuItem key={index} item={item} />
+          <CustomListItem key={index} item={item} />
         ))}
       </List>
     </Stack>

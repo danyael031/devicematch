@@ -6,6 +6,6 @@ export type ItemElement = {
   icon: ReactNode
 }
 
-export type MenuItemProps = {
+export type CustomListItemProps = {
   item: ItemElement
 }

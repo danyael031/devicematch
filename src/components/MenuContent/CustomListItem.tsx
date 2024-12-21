@@ -2,14 +2,14 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { MenuItemProps } from './types.ts'
+import { CustomListItemProps } from './types.ts'
 import { useNavigate } from 'react-router';
 
 
 
-export function MenuItem({
+export function CustomListItem({
   item
-}: MenuItemProps) {
+}: CustomListItemProps) {
   const navigate = useNavigate();
 
   function handleOnClick() {
