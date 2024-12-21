@@ -1,6 +1,13 @@
 {
   "translation": {
     "create_device": "Crear Dispositivo",
-    "lang_label": "Idioma"
+    "lang_label": "Idioma",
+    "search_compatibility": "Buscar Compatibilidad",
+    "devices": "Dispositivos",
+    "compatibilities": "Compatibilidades",
+    "categories": "Categorías",
+    "settings": "Configuración",
+    "about": "Acerca de",
+    "menu_manage": "Administrar"
   }
 }

@@ -1,34 +1,50 @@
 import List from '@mui/material/List';
 import Stack from '@mui/material/Stack';
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import AnalyticsRoundedIcon from '@mui/icons-material/AnalyticsRounded';
-import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded';
-import AssignmentRoundedIcon from '@mui/icons-material/AssignmentRounded';
+import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
+import SearchIcon from '@mui/icons-material/Search';
+import CategoryIcon from '@mui/icons-material/Category';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import { CustomListItem } from './CustomListItem';
+import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
+import { useMultiLang } from 'src/lib/multilang/multilangProvider';
+import { Box, Divider, ListSubheader } from '@mui/material';
 
-const mainListItems = [
-  { to: '/', text: 'Home', icon: <HomeRoundedIcon /> },
-  { to: '/', text: 'Analytics', icon: <AnalyticsRoundedIcon /> },
-  { to: '/', text: 'Clients', icon: <PeopleRoundedIcon /> },
-  { to: '/', text: 'Tasks', icon: <AssignmentRoundedIcon /> },
-];
-
-const secondaryListItems = [
-  { to: '/settings', text: 'Settings', icon: <SettingsRoundedIcon /> },
-  { to: '/about', text: 'About', icon: <InfoRoundedIcon /> },
-];
 
 export function MenuContent() {
+
+  const { lt } = useMultiLang();
+
+  const mainListItems = [
+    { to: '/', text: lt('search_compatibility'), icon: <SearchIcon /> },
+  ];
+
+  const manageListItems = [
+    { to: '/devices', text: lt('devices'), icon: <PhoneAndroidIcon /> },
+    { to: '/compatibilities', text: lt('compatibilities'), icon: <CompareArrowsIcon /> },
+    { to: '/categories', text: lt('categories'), icon: <CategoryIcon /> },
+  ]
+
+  const secondaryListItems = [
+    { to: '/settings', text: lt('settings'), icon: <SettingsRoundedIcon /> },
+    { to: '/about', text: lt('about'), icon: <InfoRoundedIcon /> },
+  ];
   return (
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: 'space-between' }}>
-      <List dense>
-        {mainListItems.map((item, index) => (
-          <CustomListItem key={index} item={item} />
-        ))}
-      </List>
-
+      <Box>
+        <List >
+          {mainListItems.map((item, index) => (
+            <CustomListItem key={index} item={item} />
+          ))}
+        </List>
+        <Divider />
+        <List dense>
+          <ListSubheader>{lt('menu_manage')}</ListSubheader>
+          {manageListItems.map((item, index) => (
+            <CustomListItem key={index} item={item} />
+          ))}
+        </List>
+      </Box>
       <List dense>
         {secondaryListItems.map((item, index) => (
           <CustomListItem key={index} item={item} />
