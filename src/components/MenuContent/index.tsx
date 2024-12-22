@@ -9,6 +9,7 @@ import { CustomListItem } from './CustomListItem';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import { useMultiLang } from 'src/lib/multilang/multilangProvider';
 import { Box, Divider, ListSubheader } from '@mui/material';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
 
 export function MenuContent() {
@@ -23,6 +24,7 @@ export function MenuContent() {
     { to: '/devices', text: lt('devices'), icon: <PhoneAndroidIcon /> },
     { to: '/compatibilities', text: lt('compatibilities'), icon: <CompareArrowsIcon /> },
     { to: '/categories', text: lt('categories'), icon: <CategoryIcon /> },
+    { to: '/brands', text: lt('brands'), icon: <LocalOfferIcon /> },
   ]
 
   const secondaryListItems = [

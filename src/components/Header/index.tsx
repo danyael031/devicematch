@@ -1,7 +1,8 @@
 import Stack from '@mui/material/Stack';
 import { NavbarBreadcrumbs } from 'src/components/NavbarBreadcrumbs';
+import { BreadcrumbsPath } from 'src/components/NavbarBreadcrumbs/types';
 
-export default function Header() {
+export default function Header({ breadcrumbsPath }: { breadcrumbsPath: BreadcrumbsPath }) {
   return (
     <Stack
       direction="row"
@@ -15,7 +16,7 @@ export default function Header() {
       }}
       spacing={2}
     >
-      <NavbarBreadcrumbs />
+      <NavbarBreadcrumbs path={breadcrumbsPath} />
     </Stack>
   );
 }

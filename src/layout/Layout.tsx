@@ -1,7 +1,6 @@
 import { Box, Stack } from "@mui/material";
 import { Outlet } from "react-router";
 import { AppNavbar } from "src/components/AppNavbar";
-import Header from "src/components/Header";
 import { SideMenu } from "src/components/SideMenu";
 
 export function Layout() {
@@ -26,9 +25,7 @@ export function Layout() {
             mt: { xs: 8, md: 0 },
           }}
         >
-          <Header />
           <Outlet />
-          {/*<MainGrid />*/}
         </Stack>
       </Box>
     </Box>
