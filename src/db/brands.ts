@@ -20,6 +20,8 @@ export async function getBrandByID(brandId: number): Promise<Brand | undefined> 
 }
 
 export async function updateBrand(brandId: number, brand: Partial<Brand>) {
+
+  dbclient.execute
   const result = await dbclient.execute(`UPDATE brands
 SET name = $1, image = $2
 WHERE id = $3;`, [brand.name, brand.image, brandId])
