@@ -11,6 +11,8 @@ export async function createBrand(brand: Partial<Brand>): Promise<number | undef
 
 export async function getBrands() {
   const result = await dbclient.select<Array<Brand>>("SELECT * FROM brands;")
+
+  console.log("resut: ", result)
   return result;
 }
 

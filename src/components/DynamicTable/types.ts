@@ -11,5 +11,7 @@ export type DynamicTableConfig<Item> = {
 
 export type DynamicTableProps<Item> = {
   config: DynamicTableConfig<Item>,
-  elements: Array<Item>
+  elements: Array<Item>,
+  enableDelete?: boolean,
+  deleteHandler?: () => void
 }
