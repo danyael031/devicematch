@@ -26,6 +26,7 @@ const dynamicTableConfig: DynamicTableConfig<Brand> = {
 export function BrandsPage() {
   const { lt } = useMultiLang();
   const brands = useLoaderData<Array<Brand>>();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -36,6 +37,7 @@ export function BrandsPage() {
             variant="contained"
             startIcon={<AddIcon />}
             size="small"
+            onClick={() => { navigate("/brands/add") }}
           >
             Add Brand
           </Button>
