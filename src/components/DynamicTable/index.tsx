@@ -52,7 +52,7 @@ export function DynamicTable<Item>({
 
               <TableCellDeleteIcon
                 enabled={enableDelete}
-                onClick={deleteHandler}
+                onClick={() => { deleteHandler(row) }}
               />
             </TableRow>
           ))}

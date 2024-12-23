@@ -3,10 +3,11 @@ import { DynamicTable } from "src/components/DynamicTable";
 import { DynamicTableConfig } from "src/components/DynamicTable/types";
 import Header from "src/components/Header";
 import { PageContainer } from "src/components/PageContainer";
-import { getBrands } from "src/db/brands";
+import { deleteBrand, getBrands } from "src/db/brands";
 import { useMultiLang } from "src/lib/multilang/multilangProvider";
 import AddIcon from '@mui/icons-material/Add';
 import { Button, Toolbar } from "@mui/material";
+import { enqueueSnackbar } from "notistack";
 
 
 export async function brandsLoader(): Promise<Array<Brand>> {
@@ -28,6 +29,17 @@ export function BrandsPage() {
   const brands = useLoaderData<Array<Brand>>();
   const navigate = useNavigate();
 
+  async function deleteHandler(brand: Brand) {
+    try {
+      await deleteBrand(brand.id);
+      enqueueSnackbar("Brand deleted", { variant: 'success' });
+    } catch (e) {
+      enqueueSnackbar("Error deleting brand", { variant: "error" });
+    }
+    // This force the trigger of the brandsLoader, which refresh the listed brands
+    navigate('.', { replace: true });
+  }
+
   return (
     <>
       <Header breadcrumbsPath={[lt('brands')]} />
@@ -46,6 +58,7 @@ export function BrandsPage() {
           elements={brands}
           config={dynamicTableConfig}
           enableDelete={true}
+          deleteHandler={deleteHandler}
         />
       </PageContainer>
     </>
