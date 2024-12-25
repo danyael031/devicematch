@@ -40,6 +40,10 @@ export function BrandsPage() {
     navigate('.', { replace: true });
   }
 
+  function editHandler(br: Brand) {
+    navigate(`/brands/edit/${br.id}`)
+  }
+
   return (
     <>
       <Header breadcrumbsPath={[lt('brands')]} />
@@ -58,7 +62,9 @@ export function BrandsPage() {
           elements={brands}
           config={dynamicTableConfig}
           enableDelete={true}
+          enableEdit={true}
           deleteHandler={deleteHandler}
+          editHandler={editHandler}
         />
       </PageContainer>
     </>

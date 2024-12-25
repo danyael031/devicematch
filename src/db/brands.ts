@@ -9,27 +9,25 @@ export async function createBrand(brand: Partial<Brand>): Promise<number | undef
   return result.lastInsertId
 }
 
-export async function getBrands() {
-  const result = await dbclient.select<Array<Brand>>("SELECT * FROM brands;")
+export async function getBrands(): Promise<Array<Brand>> {
+  const result = await dbclient.select<Array<Brand>>("SELECT * FROM brands;");
 
-  console.log("resut: ", result)
   return result;
 }
 
 export async function getBrandByID(brandId: number): Promise<Brand | undefined> {
-  const result = await dbclient.select<Brand>("SELECT * FROM brands WHERE id = $1;", [brandId])
-  return result;
+  const result = await dbclient.select<Array<Brand>>("SELECT * FROM brands WHERE id = $1;", [brandId])
+  let brand = result[0];
+  return brand;
 }
 
-export async function updateBrand(brandId: number, brand: Partial<Brand>) {
-
-  dbclient.execute
-  const result = await dbclient.execute(`UPDATE brands
+export async function updateBrand(brand: Partial<Brand>) {
+  await dbclient.execute(`UPDATE brands
 SET name = $1, image = $2
-WHERE id = $3;`, [brand.name, brand.image, brandId])
+WHERE id = $3;`, [brand.name, brand.image, brand.id]);
 }
 
 
 export async function deleteBrand(brandId: number) {
-  const result = await dbclient.execute(`DELETE FROM brands WHERE id = $1;`, [brandId])
+  await dbclient.execute(`DELETE FROM brands WHERE id = $1;`, [brandId]);
 }

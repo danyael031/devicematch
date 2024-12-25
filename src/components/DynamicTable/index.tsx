@@ -5,16 +5,19 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { DynamicTableProps } from './types';
+import { ActionIconProps, DynamicTableProps } from './types';
 import { Key, ReactNode } from 'react';
 import { IconButton, Typography } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 
 export function DynamicTable<Item>({
   config,
   elements,
   enableDelete = false,
-  deleteHandler = () => { }
+  enableEdit = false,
+  deleteHandler = () => { },
+  editHandler = () => { }
 }: DynamicTableProps<Item>) {
   return (
     <TableContainer component={Paper}>
@@ -29,7 +32,9 @@ export function DynamicTable<Item>({
 
               return <TableCell key={index} align="right">Calories</TableCell>
             })}
-            {enableDelete && <TableCell key="column_delete" align="center" />}
+            {(enableDelete || enableEdit) &&
+              <TableCell key="action_cell" align="right" />
+            }
           </TableRow>
         </TableHead>
         <TableBody>
@@ -41,7 +46,7 @@ export function DynamicTable<Item>({
             >
               {config.columnsConfig.map((cell, index) => {
                 if (index === 0) {
-                  return <TableCell component="th" scope="row">
+                  return <TableCell >
                     {row[cell.keyValue] as ReactNode}
                   </TableCell>
                 }
@@ -50,9 +55,11 @@ export function DynamicTable<Item>({
 
               })}
 
-              <TableCellDeleteIcon
-                enabled={enableDelete}
-                onClick={() => { deleteHandler(row) }}
+              <TableCellActions
+                enableDelete={enableDelete}
+                enableEdit={enableEdit}
+                onDelete={() => { deleteHandler(row) }}
+                onEdit={() => { editHandler(row) }}
               />
             </TableRow>
           ))}
@@ -62,20 +69,26 @@ export function DynamicTable<Item>({
   )
 }
 
-export function TableCellDeleteIcon({ enabled = false, onClick = () => { } }: { enabled?: boolean, onClick?: () => void }) {
-
-  if (!enabled) {
-    return <></>;
-  }
+export function TableCellActions({
+  enableEdit = false,
+  enableDelete = false,
+  onDelete = () => { },
+  onEdit = () => { }
+}: ActionIconProps) {
 
   return (
     <TableCell align="right">
-      <IconButton onClick={onClick} aria-label="delete">
-        <DeleteForeverIcon />
-      </IconButton>
+      {enableEdit &&
+        <IconButton onClick={onDelete} aria-label="edit">
+          <DeleteForeverIcon />
+        </IconButton>
+      }
+      {enableDelete &&
+        <IconButton onClick={onEdit} aria-label="delete">
+          <EditIcon />
+        </IconButton>
+      }
     </TableCell>
-
   )
-
-
 }
+

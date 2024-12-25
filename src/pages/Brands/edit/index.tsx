@@ -1,36 +1,61 @@
-import { DynamicTable } from "src/components/DynamicTable";
-import { DynamicTableConfig } from "src/components/DynamicTable/types";
+import { enqueueSnackbar } from "notistack";
+import { LoaderFunctionArgs, useLoaderData, useNavigate } from "react-router";
+import { BrandForm } from "src/components/BrandForm";
 import Header from "src/components/Header";
 import { PageContainer } from "src/components/PageContainer";
+import { getBrandByID, updateBrand } from "src/db/brands";
 import { useMultiLang } from "src/lib/multilang/multilangProvider";
 
-const dynamicTableConfig: DynamicTableConfig<Brand> = {
-  columnsConfig: [
-    { columnName: "Name", keyValue: "name" }
-  ],
-  elementKey: 'id'
+
+export async function brandLoader(args: LoaderFunctionArgs): Promise<Brand> {
+
+  const id = Number(args.params.id);
+
+  const brand: Brand | undefined = await getBrandByID(id);
+
+  if (!brand) {
+    throw new Error('Brand does not exist!');
+  }
+
+  return brand
 }
 
-const elements: Array<Brand> = [
-  { id: 1, name: "Samsung", image: null },
-  { id: 2, name: "Xiaomi", image: null },
-  { id: 3, name: "Random", image: null },
-  { id: 4, name: "Random2", image: null },
-  { id: 5, name: "Random3", image: null },
-  { id: 6, name: "Random4", image: null },
-]
 
+export function EditBrandPage() {
 
-export function BrandsPage() {
+  const { lt } = useMultiLang();
 
-  const { lt } = useMultiLang()
+  const brand = useLoaderData<Brand>();
+
+  const navigate = useNavigate();
+
+  const handleOnSubmit = async (updatedBrand: Partial<Brand>) => {
+
+    try {
+      await updateBrand(updatedBrand);
+      enqueueSnackbar("Brand updated", { variant: "success" });
+    } catch (e) {
+      enqueueSnackbar("Error updating Brand", { variant: "error" });
+    }
+
+    navigate(-1);
+  }
+
+  const handleCancel = () => {
+    navigate(-1);
+  }
 
   return (
     <>
-      <Header breadcrumbsPath={[lt('brands')]} />
+      <Header breadcrumbsPath={[lt('brands'), "Edit Brand", brand.name]} />
       <PageContainer>
-        <DynamicTable elements={elements} config={dynamicTableConfig} />
+        <BrandForm
+          brand={brand}
+          onSubmit={handleOnSubmit}
+          onCancel={handleCancel}
+        />
       </PageContainer>
     </>
   )
 }
+

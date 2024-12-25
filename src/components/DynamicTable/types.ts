@@ -13,5 +13,14 @@ export type DynamicTableProps<Item> = {
   config: DynamicTableConfig<Item>,
   elements: Array<Item>,
   enableDelete?: boolean,
-  deleteHandler?: (item: Item) => void
+  enableEdit?: boolean,
+  deleteHandler?: (item: Item) => void,
+  editHandler?: (item: Item) => void,
+}
+
+export type ActionIconProps = {
+  enableEdit: boolean,
+  enableDelete: boolean,
+  onDelete?: () => void,
+  onEdit?: () => void
 }

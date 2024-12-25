@@ -7,6 +7,7 @@ export default function Header({ breadcrumbsPath }: { breadcrumbsPath: Breadcrum
     <Stack
       direction="row"
       sx={{
+        position: 'sticky',
         display: { md: 'flex' },
         width: '100%',
         alignItems: { xs: 'flex-start', md: 'center' },

@@ -24,6 +24,7 @@ export function NavbarBreadcrumbs({ path = [] }: NavbarBreadcrumbsProps) {
 
         if (index === 0) {
           return <Typography
+            key={index}
             sx={{ color: 'text.primary', fontWeight: 600 }}
             variant="body1"
           >
@@ -32,6 +33,7 @@ export function NavbarBreadcrumbs({ path = [] }: NavbarBreadcrumbsProps) {
         }
 
         return <Typography
+          key={index}
           variant="body1"
         >
           {st}
