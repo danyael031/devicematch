@@ -46,16 +46,20 @@ export function DynamicTable<Item>({
             >
               {config.columnsConfig.map((cell, index) => {
                 if (index === 0) {
-                  return <TableCell >
+                  return <TableCell key={index}>
                     {row[cell.keyValue] as ReactNode}
                   </TableCell>
                 }
 
-                return <TableCell align="right">{row[cell.keyValue] as ReactNode}</TableCell>;
+                return <TableCell
+                  key={index}
+                  align="right"
+                >{row[cell.keyValue] as ReactNode}</TableCell>;
 
               })}
 
               <TableCellActions
+                key="actions"
                 enableDelete={enableDelete}
                 enableEdit={enableEdit}
                 onDelete={() => { deleteHandler(row) }}
