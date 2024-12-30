@@ -8,6 +8,7 @@ import { useMultiLang } from "src/lib/multilang/multilangProvider";
 import AddIcon from '@mui/icons-material/Add';
 import { Button, Toolbar } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
+import { ConfirmDialog } from "src/components/ConfirmDialog";
 
 
 export async function brandsLoader(): Promise<Array<Brand>> {
@@ -67,6 +68,10 @@ export function BrandsPage() {
           editHandler={editHandler}
         />
       </PageContainer>
+      <ConfirmDialog
+        title="Delete brand"
+        text=""
+      />
     </>
   )
 }

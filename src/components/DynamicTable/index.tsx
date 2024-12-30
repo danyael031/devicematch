@@ -6,10 +6,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { ActionIconProps, DynamicTableProps } from './types';
-import { Key, ReactNode } from 'react';
+import { Key, ReactNode, useState } from 'react';
 import { IconButton, Typography } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+import { ConfirmDialog } from '../ConfirmDialog';
+import { useToggle } from 'src/hooks/useToggle';
 
 export function DynamicTable<Item>({
   config,
@@ -80,19 +82,30 @@ export function TableCellActions({
   onEdit = () => { }
 }: ActionIconProps) {
 
+  const [deleteDialogOpen, toggleDeleteDialogOpen] = useToggle(false);
+
   return (
-    <TableCell align="right">
-      {enableEdit &&
-        <IconButton onClick={onDelete} aria-label="edit">
-          <DeleteForeverIcon />
-        </IconButton>
-      }
-      {enableDelete &&
-        <IconButton onClick={onEdit} aria-label="delete">
-          <EditIcon />
-        </IconButton>
-      }
-    </TableCell>
+    <>
+      <ConfirmDialog
+        isOpen={deleteDialogOpen}
+        title="Delete"
+        text={`Are you sure you want to delete this item?`}
+        onClose={() => { toggleDeleteDialogOpen() }}
+        onConfirm={onDelete}
+      />
+      <TableCell align="right">
+        {enableEdit &&
+          <IconButton onClick={() => { toggleDeleteDialogOpen() }} aria-label="edit">
+            <DeleteForeverIcon />
+          </IconButton>
+        }
+        {enableDelete &&
+          <IconButton onClick={onEdit} aria-label="delete">
+            <EditIcon />
+          </IconButton>
+        }
+      </TableCell>
+    </>
   )
 }
 
