@@ -7,7 +7,9 @@ import { DevicesPage } from "src/pages/Devices";
 import { CompatibilitiesPage } from "src/pages/Compatibilities";
 import { CategoriesPage } from "src/pages/Categories";
 import { AboutPage } from "src/pages/About";
-import { BrandsPage } from "src/pages/Brands";
+import { brandsLoader, BrandsPage } from "src/pages/Brands";
+import { AddBrandPage } from "src/pages/Brands/add";
+import { brandLoader, EditBrandPage } from "src/pages/Brands/edit";
 
 export const router = createBrowserRouter([
   {
@@ -32,7 +34,17 @@ export const router = createBrowserRouter([
 
       {
         path: '/brands',
-        Component: BrandsPage
+        Component: BrandsPage,
+        loader: brandsLoader
+      },
+      {
+        path: '/brands/add',
+        Component: AddBrandPage,
+      },
+      {
+        path: '/brands/edit/:id',
+        Component: EditBrandPage,
+        loader: brandLoader
       },
       {
         path: '/settings',

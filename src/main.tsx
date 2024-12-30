@@ -11,11 +11,13 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { MultiLangProvider } from "./lib/multilang/multilangProvider";
 import { mlang } from "src/lang";
+import { SnackbarProvider } from "notistack";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <SnackbarProvider maxSnack={4} />
       <MultiLangProvider mlang={mlang}>
         <AppRouter />
       </MultiLangProvider >
