@@ -5,11 +5,13 @@ import { Layout } from "src/layout/Layout";
 import { SettingsPage } from "src/pages/Settings";
 import { DevicesPage } from "src/pages/Devices";
 import { CompatibilitiesPage } from "src/pages/Compatibilities";
-import { CategoriesPage } from "src/pages/Categories";
+import { categoriesLoader, CategoriesPage } from "src/pages/Categories";
 import { AboutPage } from "src/pages/About";
 import { brandsLoader, BrandsPage } from "src/pages/Brands";
 import { AddBrandPage } from "src/pages/Brands/add";
 import { brandLoader, EditBrandPage } from "src/pages/Brands/edit";
+import { AddCategoryPage } from "src/pages/Categories/add";
+import { categoryLoader, EditCategoryPage } from "src/pages/Categories/edit";
 
 export const router = createBrowserRouter([
   {
@@ -29,9 +31,18 @@ export const router = createBrowserRouter([
       },
       {
         path: '/categories',
-        Component: CategoriesPage
+        Component: CategoriesPage,
+        loader: categoriesLoader
       },
-
+      {
+        path: '/categories/add',
+        Component: AddCategoryPage
+      },
+      {
+        path: '/categories/edit/:id',
+        Component: EditCategoryPage,
+        loader: categoryLoader
+      },
       {
         path: '/brands',
         Component: BrandsPage,
