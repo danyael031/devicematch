@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import { MainPage } from "../pages/Main";
 import { Layout } from "src/layout/Layout";
 import { SettingsPage } from "src/pages/Settings";
-import { DevicesPage } from "src/pages/Devices";
+import { devicesLoader, DevicesPage } from "src/pages/Devices";
 import { CompatibilitiesPage } from "src/pages/Compatibilities";
 import { categoriesLoader, CategoriesPage } from "src/pages/Categories";
 import { AboutPage } from "src/pages/About";
@@ -12,6 +12,8 @@ import { AddBrandPage } from "src/pages/Brands/add";
 import { brandLoader, EditBrandPage } from "src/pages/Brands/edit";
 import { AddCategoryPage } from "src/pages/Categories/add";
 import { categoryLoader, EditCategoryPage } from "src/pages/Categories/edit";
+import { AddDevicePage } from "src/pages/Devices/add";
+import { deviceLoader, EditDevicePage } from "src/pages/Devices/edit";
 
 export const router = createBrowserRouter([
   {
@@ -22,8 +24,18 @@ export const router = createBrowserRouter([
         Component: MainPage
       },
       {
-        path: '/devices',
-        Component: DevicesPage
+        path: '/devices/add',
+        Component: AddDevicePage
+      },
+      {
+        path: '/devices/edit/:deviceId',
+        Component: EditDevicePage,
+        loader: deviceLoader
+      },
+      {
+        path: '/devices/:brandId',
+        Component: DevicesPage,
+        loader: devicesLoader
       },
       {
         path: '/compatibilities',

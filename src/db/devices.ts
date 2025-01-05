@@ -16,13 +16,13 @@ export async function getDevices(): Promise<Array<Device>> {
 }
 
 export async function getDevicesByBrand(brandId: number): Promise<Array<Device>> {
-  const result = await dbclient.select<Array<Device>>("SELECT * FROM devices WHERE device_id = $1;", [brandId]);
+  const result = await dbclient.select<Array<Device>>("SELECT * FROM devices WHERE brand_id = $1;", [brandId]);
 
   return result;
 }
 
 export async function getDeviceById(deviceId: number): Promise<Device | undefined> {
-  const result = await dbclient.select<Array<Device>>("SELECT * FROM categories WHERE id = $1;", [deviceId])
+  const result = await dbclient.select<Array<Device>>("SELECT * FROM devices WHERE id = $1;", [deviceId])
   let device = result[0];
   return device;
 }

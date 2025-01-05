@@ -25,3 +25,13 @@ interface DeviceCompatibility {
   device2_id: number;
   category_id: number;
 }
+
+interface DevicesLoaderResult {
+  brand: Brand;
+  devices: Array<Device>;
+}
+
+interface DeviceLoaderResult {
+  brand: Brand;
+  device: Device;
+}
