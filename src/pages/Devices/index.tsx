@@ -7,7 +7,7 @@ import { LoaderFunctionArgs, useLoaderData, useNavigate } from "react-router";
 import { DynamicTableConfig } from "src/components/DynamicTable/types";
 import { DynamicTable } from "src/components/DynamicTable";
 import AddIcon from '@mui/icons-material/Add';
-import { Button, Toolbar } from "@mui/material";
+import { Button, Toolbar, Typography } from "@mui/material";
 import { deleteDevice, getDevicesByBrand } from "src/db/devices";
 import { getBrandByID } from "src/db/brands";
 import { BrandSelect } from "src/components/BrandSelect";
@@ -39,7 +39,7 @@ const dynamicTableConfig: DynamicTableConfig<Device> = {
 export function DevicesPage() {
   const { lt } = useMultiLang();
 
-  const loaderResult = useLoaderData<DevicesLoaderResult>();
+  const loaderResult = useLoaderData<DevicesLoaderResult | undefined>();
   const navigate = useNavigate();
 
   async function deleteHandler(device: Device) {
@@ -72,7 +72,7 @@ export function DevicesPage() {
       <Header breadcrumbsPath={[lt('devices')]} />
       <PageContainer>
         <BrandSelect
-          value={loaderResult.brand}
+          value={loaderResult?.brand || null}
           onChange={changeBrand}
         />
         <Toolbar sx={{ justifyContent: "flex-end" }}>
@@ -85,14 +85,22 @@ export function DevicesPage() {
             Add Device
           </Button>
         </Toolbar>
-        <DynamicTable
-          elements={loaderResult.devices}
-          config={dynamicTableConfig}
-          enableDelete={true}
-          enableEdit={true}
-          deleteHandler={deleteHandler}
-          editHandler={editHandler}
-        />
+
+        {
+          loaderResult ?
+            <DynamicTable
+              elements={loaderResult.devices}
+              config={dynamicTableConfig}
+              enableDelete={true}
+              enableEdit={true}
+              deleteHandler={deleteHandler}
+              editHandler={editHandler}
+            />
+            :
+            <Typography>Please select a brand to show the devices</Typography>
+
+        }
+
       </PageContainer>
     </>
   )

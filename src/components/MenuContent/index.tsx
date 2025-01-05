@@ -21,7 +21,7 @@ export function MenuContent() {
   ];
 
   const manageListItems = [
-    { to: '/devices/1', text: lt('devices'), icon: <PhoneAndroidIcon /> },
+    { to: '/devices', text: lt('devices'), icon: <PhoneAndroidIcon /> },
     { to: '/compatibilities', text: lt('compatibilities'), icon: <CompareArrowsIcon /> },
     { to: '/categories', text: lt('categories'), icon: <CategoryIcon /> },
     { to: '/brands', text: lt('brands'), icon: <LocalOfferIcon /> },

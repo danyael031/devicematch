@@ -24,6 +24,10 @@ export const router = createBrowserRouter([
         Component: MainPage
       },
       {
+        path: '/devices',
+        Component: DevicesPage,
+      },
+      {
         path: '/devices/add',
         Component: AddDevicePage
       },
